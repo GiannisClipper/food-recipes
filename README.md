@@ -39,9 +39,9 @@ CREATE a django core app
   (add 'core' in INSTALLED_APPS list in /app/app/settings.py)
 
 
-CREATE & RUN tests
+CREATE & RUN tests (and flake8 for linting)
     (create /app/core/test_models.py)
-    $ sudo docker-compose run app sh -c "python manage.py test"
+    $ sudo docker-compose run app sh -c "python manage.py test && flake8"
 
 
 IMPLEMENT custom user model

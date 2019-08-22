@@ -13,7 +13,17 @@ class userManager(BaseUserManager):
 
         user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
-        user.save(using=self._db) #arg needed when working with mutiple dbases
+        user.save(using=self._db)  # need arg when working with mutiple dbases
+
+        return user
+
+    def create_superuser(self, email, password):
+        """Creates and saves a new superuser"""
+
+        user = self.create_user(email, password)
+        user.is_staff = True
+        user.is_superuser = True  # superuser defined in PermissionsMixin
+        user.save(using=self._db)
 
         return user
 
