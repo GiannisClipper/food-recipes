@@ -1,22 +1,34 @@
-#sudo docker build .
+# to implement Dockerfile: $ sudo docker build .
+# to implement when modified: $ sudo docker-compose build
 
 FROM python:3.7-alpine
-#lightweight version
+# alpine = lightweight version
 
 MAINTAINER Giannis Clipper
-#optional
+# optional
 
 ENV PYTHONUNBUFFERED 1
-#recommended when running python into docker containers
+# recommended when running python into docker containers
 
 COPY ./requirements.txt /requirements.txt
+
+RUN apk add --update --no-cache postgresql-client
+# apk = run package manager which comes with Alpine to add a new package
+# --no-cache = no store registry index in docker file
+RUN apk add --update --no-cache --virtual .tmp-build-deps \
+    gcc libc-dev linux-headers postgresql-dev
+# temporary packages
+
 RUN pip install -r /requirements.txt
+
+RUN apk del .tmp-build-deps
+# remove temporary packages
 
 RUN mkdir /app
 WORKDIR /app
 COPY ./app /app
 
 RUN adduser -D user
-#with -D the user can simply run processes, not having home directory or log in authorization
+# with -D the user can simply run processes, not having home directory or log in authorization
 USER user
-#switch to the user for security reasons (instead of root access)
+# switch to the user for security reasons (instead of root access)
