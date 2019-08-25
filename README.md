@@ -35,7 +35,7 @@ CREATE & RUN tests (and flake8 for linting)
     (create /app/core/test_models.py)
     $ sudo docker-compose run app sh -c "python manage.py test && flake8"
 
-IMPLEMENT custom user model
+CREATE a custom user model
   (create user model in models.py in the core app)
   (add in /app/app/settings.py: AUTH_USER_MODEL = 'core.User')
   $ sudo docker-compose run app sh -c "python manage.py makemigrations core"
@@ -61,3 +61,15 @@ CREATE a user app
   (add 'user' in INSTALLED_APPS list in /app/app/settings.py)
   (add 'rest_framework' in INSTALLED_APPS list in /app/app/settings.py)
   (add 'rest_framework.authtoken' in INSTALLED_APPS list in /app/app/settings.py)
+  (add 'admin.site.register(models.User, UserAdmin)' in /app/core/admin.py)
+
+CREATE a recipe app
+  $ sudo docker-compose run app sh -c "python manage.py startapp recipe"
+  (remove migrations, admin.py, models.py from /app/user -keep in core app)
+  (remove tests.py but create directory /app/user/tests with __init__.py)
+  (add 'recipe' in INSTALLED_APPS list in /app/app/settings.py)
+  (add 'admin.site.register(models.Tag)' in /app/core/admin.py)
+
+CREATE a tag model
+  (create tagr model in models.py in the core app)
+  $ sudo docker-compose run app sh -c "python manage.py makemigrations core"
