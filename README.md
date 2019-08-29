@@ -68,8 +68,21 @@ CREATE a recipe app
   (remove migrations, admin.py, models.py from /app/user -keep in core app)
   (remove tests.py but create directory /app/user/tests with __init__.py)
   (add 'recipe' in INSTALLED_APPS list in /app/app/settings.py)
-  (add 'admin.site.register(models.Tag)' in /app/core/admin.py)
 
 CREATE a tag model
-  (create tagr model in models.py in the core app)
+  (create tag model in models.py in the core app)
   $ sudo docker-compose run app sh -c "python manage.py makemigrations core"
+
+ADD in recipe app tag operations
+  (add 'admin.site.register(models.Tag)' in /app/core/admin.py)
+  (create recipe/tests/test_tags_api.py)
+  (modify recipe/serializers.py, recipe/views.py, recipe/urls.py)
+
+CREATE an ingredient model (similar to tag model)
+  (create ingredient model in models.py in the core app)
+  $ sudo docker-compose run app sh -c "python manage.py makemigrations core"
+
+ADD in recipe app ingredient operations (similar to tag operations)
+  (add 'admin.site.register(models.Ingredient)' in /app/core/admin.py)
+  (create recipe/tests/test_ingredients_api.py)
+  (modify recipe/serializers.py, recipe/views.py, recipe/urls.py)
