@@ -4,12 +4,12 @@ Django REST Framework and Docker using Test Driven Development (TDD)\
 Notes:\
 \
 SETUP Docker\
-  https://docs.docker.com/install/linux/docker-ce/ubuntu/\
+  https://docs.docker.com/install/linux/docker-ce/ubuntu/ \
   (install using the convenience script)\
   $ curl -fsSL https://get.docker.com -o get-docker.sh\
   $ sudo sh get-docker.sh\
 \
-  https://docs.docker.com/compose/install/\
+  https://docs.docker.com/compose/install/ \
   $ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
   $ sudo chmod +x /usr/local/bin/docker-compose\
 \
